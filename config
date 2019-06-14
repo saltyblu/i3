@@ -4,11 +4,16 @@
 #background
 exec --no-startup-id feh --bg-fill /home/vschmi/.config/background.jpg
 
+# xresources
+exec --no-startup-id xrdb ~/.Xresources &
 
-#bar
+#bar replaced by kde
 exec --no-startup-id xfce4-panel --disable-wm-check
+
 # startups
 
+# guake
+exec --no-startup-id guake
 ## i3 icons in virtualdesktops overview in virtual desktop view
 exec --no-startup-id /home/vschmi/.config/i3/i3status/i3-autoname-workspaces.py  > /home/vschmi/.log/i3-autoname-workspaces.log &
 
@@ -179,6 +184,10 @@ bindym Ctrl+Momd1+S exec i3-scrot
 # keepass
 bindsym Ctrl+Mod1+A exec mono /usr/share/keepass/KeePass.exe --auto-type
 
+# disable enable touchpad
+bindym $mod+XF86Switch_VT_7 exec exec ~/bin/touchpad-ed
+
+
 ## start applets
 # moved to xprofile
 
@@ -210,10 +219,8 @@ bindsym Mod1+Ctrl+Left exec "i3-msg move workspace to output left"
 bindsym Mod1+Ctrl+Right exec "i3-msg move workspace to output right"
 
 
-# play coco
-bindsym $mod+Ctrl+2 exec ssh -q -A -n -o StrictHostKeyChecking=no -t pi@pi omxplayer /home/pi/raspberry_soundboard/sounds/Songs/coco.mp3 &
-bindsym $mod+Ctrl+1 exec ssh -q -A -n -o StrictHostKeyChecking=no -t pi@pi omxplayer /home/pi/raspberry_soundboard/sounds/Frust/tischkaputt.mp3 &
-bindsym $mod+Ctrl+3 exec ssh -q -A -n -o StrictHostKeyChecking=no -t pi@pi omxplayer /home/pi/raspberry_soundboard/sounds/Frust/long-easy-street.mp3 &
+# play oh man oh man oh man es staaaartet
+bindsym $mod+Ctrl+2 exec ssh -q -A -n -o StrictHostKeyChecking=no -t pi@pi omxplayer /home/pi/raspberry_soundboard/sounds/Freude/startet.mp3 &
 
 # scratchpad
 ## create scratchpad
@@ -252,3 +259,29 @@ for_window [class="Kmix"] floating enable; border none
 for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none
 
+
+
+#### Plasma
+exec --no-startup-id wmctrl -c Plasma
+
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+
+## Avoid tiling popups, dropdown windows from plasma
+
+# for the first time, manually resize them, i3 will remember the setting for floating windows
+
+for_window [class="plasmashell"] floating enable;
+
+for_window [class="Plasma"] floating enable; border none
+
+for_window [title="plasma-desktop"] floating enable; border none
+
+for_window [title="win7"] floating enable; border none
+
+for_window [class="krunner"] floating enable; border none
+
+for_window [class="Kmix"] floating enable; border none
+
+for_window [class="Klipper"] floating enable; border none
+
+for_window [class="Plasmoidviewer"] floating enable; border none
