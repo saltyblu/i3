@@ -1,5 +1,7 @@
 # i3 config file (v4)
-#
+
+#background
+exec --no-startup-id feh --bg-fill $HOME/.config/background.jpg
 
 # xresources
 exec --no-startup-id xrdb ~/.Xresources &
