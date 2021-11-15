@@ -1,5 +1,8 @@
 # i3 config file (v4)
 
+exec_always --no-startup-id feh --bg-scale ~/.config/background.jpg
+exec_always picom --backend glx --experimental-backends -bcCG --config ~/.config/picom.conf
+
 # set $mod Mod1
 set $mod Mod4
 
@@ -13,10 +16,6 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec sakura 
-
-# set lock screen and autolog with xautolog
-#bindsym Mod1+Ctrl+l exec i3lock -e --color=333333
-bindsym Mod1+Ctrl+l exec i3lock -e -i $HOME/.config/background.jpg
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -143,22 +142,6 @@ client.urgent           #C10004 #900000 #ffffff #900000
 # floating window minumum size
 floating_minimum_size 175 x 100
 
-set $Locker i3lock && sleep 1
-
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec shutdown -h now, mode "default"
-
-# back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
 bindsym $mod+P  mode "$mode_system"
 
 #screenshot
@@ -210,9 +193,6 @@ for_window [class="gnome-pie"] $float $border-0px
 for_window [class="Pavucontrol"] floating enable, border normal
 
 set $FLOAT floating enable, border normal 0
-for_window [class="docky"] $FLOAT
-for_window [class="Docky"] $FLOAT
-
 for_window [title="Desktop — Plasma"] kill, floating enable, border none
 for_window [class="plasmashell"] floating enable
 for_window [class="Plasma"] floating enable, border none
@@ -225,3 +205,9 @@ for_window [class="Plasmoidviewer"] floating enable, border none
 for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
 no_focus [class="plasmashell" window_type="notification"]
+for_window [class="Plasma-desktop"] border none
+for_window [class="Plasma-desktop"] floating enable
+for_window [class="krunner"] border none
+for_window [class="Kmix"] floating enable
+for_window [class="Plasmoidviewer"] floating enable
+for_window [class="Klipper"] floating enable, border none
