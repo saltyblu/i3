@@ -1,6 +1,9 @@
 # i3 config file (v4)
 
-exec_always --no-startup-id feh --bg-scale ~/.config/background.jpg
+# https://userbase.kde.org/Tutorials/Using_Other_Window_Managers_with_Plasma#I3_configuration
+
+exec_always --no-startup-id feh --bg-scale ~/.config/wallpaper.png
+exec_always ssh-agent
 exec_always picom --backend glx --experimental-backends -bcCG --config ~/.config/picom.conf
 
 # set $mod Mod1
@@ -15,13 +18,16 @@ font pango: Ubuntu Regular 16
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec sakura 
+bindsym $mod+Return exec konsole
+
+# guake yakuake term
+#bindsym $mod+x exec i3-quickterm shell
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id /home/vschmi/bin/rofi-hud
+#bindsym $mod+d exec --no-startup-id /home/vschmi/bin/rofi-hud
 
 #alt+tab
 bindsym Mod1+Tab exec --no-startup-id /home/vschmi/bin/rofi-alttab
@@ -144,14 +150,11 @@ floating_minimum_size 175 x 100
 
 bindsym $mod+P  mode "$mode_system"
 
-#screenshot
-bindym Ctrl+Momd1+S exec i3-scrot
-
 # keepass
 bindsym Ctrl+Mod1+A exec mono /usr/share/keepass/KeePass.exe --auto-type
 
 # disable enable touchpad
-bindym $mod+XF86Switch_VT_7 exec exec ~/bin/touchpad-ed
+bindsym $mod+XF86Switch_VT_7 exec exec ~/bin/touchpad-ed
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -179,7 +182,7 @@ bindsym Mod1+Ctrl+Right exec "i3-msg move workspace to output right"
 
 
 # play oh man oh man oh man es staaaartet
-bindsym $mod+Ctrl+2 exec ssh -q -A -n -o StrictHostKeyChecking=no -t pi@pi omxplayer /home/pi/raspberry_soundboard/sounds/Freude/startet.mp3 &
+#bindsym $mod+Ctrl+2 exec ssh -q -A -n -o StrictHostKeyChecking=no -t pi@pi omxplayer /home/pi/raspberry_soundboard/sounds/Freude/startet.mp3 &
 
 # scratchpad
 ## create scratchpad
@@ -193,8 +196,10 @@ for_window [class="gnome-pie"] $float $border-0px
 for_window [class="Pavucontrol"] floating enable, border normal
 
 set $FLOAT floating enable, border normal 0
+for_window [class="yakuake"] floating enable
 for_window [title="Desktop — Plasma"] kill, floating enable, border none
 for_window [class="plasmashell"] floating enable
+for_window [class="Calculator"] floating enable
 for_window [class="Plasma"] floating enable, border none
 for_window [title="plasma-desktop"] floating enable, border none
 for_window [title="win7"] floating enable, border none
@@ -211,3 +216,4 @@ for_window [class="krunner"] border none
 for_window [class="Kmix"] floating enable
 for_window [class="Plasmoidviewer"] floating enable
 for_window [class="Klipper"] floating enable, border none
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
